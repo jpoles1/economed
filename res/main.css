@@ -1,10 +1,25 @@
-body{
+body {
     padding: 25px;
 }
-.cost-input{
+
+#content {
+    width: 600px;
+    margin: auto;
+    background-color: #ddd;
+    display: flex;
+    padding: 30px 10px;
+    border-radius: 15px;
+}
+
+#care-list {
+    margin: auto;
+}
+
+.cost-input {
     display: flex;
 }
-.cost-input-box{
+
+.cost-input-box {
     display: inline-block;
     padding: 15px;
     border: 1px solid black;

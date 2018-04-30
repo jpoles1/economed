@@ -1,3 +1,13 @@
+function sumCosts(){
+    var totalCost = 0.0
+    $(".cost-value > .cost-number").each(function(_, entry){
+        cellValue = parseFloat($(entry).html())
+        if(!isNaN(cellValue)){
+            totalCost += cellValue
+        }
+    })
+    $(".cost-total").html("Total Cost: $" + totalCost)
+}
 function initializeAutocompleteTextbox(data){
     $(".cost-input > .cost-input-box > input").each(function(_, entry){
         var btn = $(entry).siblings("button").first();
@@ -19,7 +29,8 @@ function initializeAutocompleteTextbox(data){
         });
         Awesomplete.$(entry).addEventListener("awesomplete-selectcomplete", function(){
             inputValue = $(this).val()
-            $(this).parents(".cost-input").children(".cost-value").html("$ " + data[inputValue].cost)
+            $(this).parents(".cost-input").children(".cost-value").children(".cost-number").html(data[inputValue].cost)
+            sumCosts()
         })
     
     })
