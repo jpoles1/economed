@@ -6,7 +6,7 @@ function sumCosts(){
             totalCost += cellValue
         }
     })
-    $(".cost-total").html("Total Cost: $" + totalCost)
+    $(".cost-total").html("Total Cost: $" + totalCost.toFixed(2));
 }
 function initializeAutocompleteTextbox(data){
     $(".cost-input > .cost-input-box > input").each(function(_, entry){
