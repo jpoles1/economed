@@ -14,33 +14,38 @@
 
 <body>
     <div id="content">
-        <div id="care-list">
-            <div id="cost-list">
-                <template id="cost-input-template">
-                    <div class="cost-input">
-                        <div class="cost-input-box">
-                            <input class="dropdown-input" />
-                            <button class="dropdown-btn" type="button">
-                                <i class="fas fa-caret-down"></i>
+        <center>
+                <h1>EconoDoc</h1>
+        </center>
+        <div id="care-list-container">
+            <div id="care-list">
+                <div id="cost-list">
+                    <template id="cost-input-template">
+                        <div class="cost-input">
+                            <div class="cost-input-box">
+                                <input class="dropdown-input" />
+                                <button class="dropdown-btn" type="button">
+                                    <i class="fas fa-caret-down"></i>
+                                </button>
+                            </div>
+                            <div class="cost-input-box cost-value">
+                                $
+                                <span class="cost-number">--.--</span>
+                            </div>
+                            <button class="delete-btn" type="button">
+                                <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
-                        <div class="cost-input-box cost-value">
-                            $
-                            <span class="cost-number">--.--</span>
-                        </div>
-                        <button class="delete-btn" type="button">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </template>
-            </div>
-            <br>
-            <div class="cost-input">
-                <div class="cost-input-box">
-                    <button id="add-cost" type="button">Add Cost Entry</button>
+                    </template>
                 </div>
-                <div class="cost-input-box cost-total">
-                    Total Cost: $0.00
+                <br>
+                <div class="cost-input">
+                    <div class="cost-input-box">
+                        <button id="add-cost" type="button">Add Cost Entry</button>
+                    </div>
+                    <div class="cost-input-box cost-total">
+                        Total Cost: $0.00
+                    </div>
                 </div>
             </div>
         </div>

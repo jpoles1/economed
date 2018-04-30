@@ -6,9 +6,12 @@ body {
     width: 600px;
     margin: auto;
     background-color: #ddd;
-    display: flex;
     padding: 30px 10px;
     border-radius: 15px;
+}
+
+#care-list-container{
+    display: flex;
 }
 
 #care-list {
