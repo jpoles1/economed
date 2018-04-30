@@ -24,3 +24,7 @@ body {
     padding: 15px;
     border: 1px solid black;
 }
+ul[role='listbox']{
+    height: 400px;
+    overflow-y: scroll;
+}

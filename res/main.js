@@ -48,7 +48,8 @@ function initializeAutocompleteTextbox(costData) {
         var btn = $(entry).siblings("button").first();
         var comboplete = new Awesomplete(entry, {
             minChars: 0,
-            list: Object.keys(costData)
+            list: Object.keys(costData),
+            maxItems: 10000
         });
         $(btn).click(function () {
             if (comboplete.ul.childNodes.length === 0) {
