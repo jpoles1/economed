@@ -11,8 +11,11 @@ function sumCosts() {
 
 function generateURL() {
     urlArray = []
-    $(".dropdown-input").each(function (_, entry) {
-        urlArray.push($(this).val())
+    $(".dropdown-input").each(function (_) {
+        costName = $(this).val();
+        if(costName.length > 0){
+            urlArray.push(costName)
+        }
     })
     urlString = urlArray.join(",")
     console.log(urlArray, urlString)
@@ -22,20 +25,21 @@ function generateURL() {
 
 function loadURLConfig(costData) {
     urlString = decodeURI(window.location.hash)
-    if(urlString.length > 0){
+    if (urlString.length > 0) {
         urlString = urlString.split('#')[1]
         first = 1;
         $(urlString.split(",")).each(function (_, entry) {
-            if(Object.keys(costData).includes(entry)){
+            if (Object.keys(costData).includes(entry)) {
                 if (!first) {
                     $("#cost-list").append($("#cost-input-template").html())
                 } else {
                     first = 0
                 }
                 $("#cost-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
-                $("#cost-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(costData[entry].cost)    
+                $("#cost-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(costData[entry].cost)
             }
         })
+        sumCosts()
     }
 }
 
@@ -66,6 +70,22 @@ function initializeAutocompleteTextbox(costData) {
     })
 }
 
+function activateDeleteButtons(costData){
+    $(".delete-btn").click(function () {
+        $(this).parent().remove()
+        sumCosts()
+        generateURL()
+        if ($(".cost-value").length < 1) {
+            addCostEntry(costData)
+        }
+    })
+}
+function addCostEntry(costData) {
+    $("#cost-list").append($("#cost-input-template").html())
+    initializeAutocompleteTextbox(costData)
+    activateDeleteButtons(costData)
+}
+
 $(function () {
     var costData;
     $("#cost-list").append($("#cost-input-template").html())
@@ -73,10 +93,10 @@ $(function () {
         costData = data;
         loadURLConfig(costData)
         initializeAutocompleteTextbox(costData)
+        activateDeleteButtons(costData)
     })
     $("#add-cost").click(function () {
-        $("#cost-list").append($("#cost-input-template").html())
-        initializeAutocompleteTextbox(costData)
+        addCostEntry(costData)
         return false
     })
 })
