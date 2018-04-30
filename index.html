@@ -2,9 +2,11 @@
 
 <head>
     <title>EconoDoc</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
         crossorigin="anonymous">
     <link href="res/awesomplete.css" rel="stylesheet">
+    <link href="res/press.min.css" rel="stylesheet">
     <link href="res/main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
@@ -39,7 +41,7 @@
                                     <span class="cost-number">--.--</span>
                                 </td>
                                 <td>
-                                    <button class="delete-btn" type="button">
+                                    <button class="delete-btn press press-red press-round press-ghost" type="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>
@@ -49,7 +51,9 @@
                     <tfoot>
                         <tr class="cost-input">
                             <td class="cost-input-box">
-                                <button id="add-cost" type="button">Add Intervention</button>
+                                <button id="add-cost" type="button" class="press press-deeppurple press-round">
+                                    Add Intervention
+                                </button>
                             </td>
                             <td class="cost-input-box cost-total">
                                 $0.00

@@ -1,13 +1,18 @@
 body {
-    padding: 25px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
 }
-
 #content {
-    width: 600px;
-    margin: auto;
+    margin-top: 50px;
+    display: inline-block;
     background-color: #ddd;
-    padding: 30px 10px;
+    padding: 40px 50px;
     border-radius: 15px;
+    align-self: baseline;
+}
+h1{
+    margin-top: 0px
 }
 table{
     border-collapse: collapse;
@@ -20,15 +25,15 @@ table, th, td {
 #care-list-container{
     display: flex;
 }
-
 #care-list {
     margin: auto;
 }
-
 .cost-input {
     text-align: center;
 }
-
+.dropdown-input{
+    text-align: center;
+}
 .cost-input-box {
     padding: 15px;
 }
@@ -36,6 +41,10 @@ ul[role='listbox']{
     max-height: 400px;
     overflow-y: scroll;
 }
-.delete-btn:parent{
-display: flex;
+.delete-btn{
+    font-size: 14px;
+    margin: 0 5px;
+}
+#add-cost{
+    font-size: 14px;
 }
