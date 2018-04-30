@@ -6,7 +6,7 @@ function sumCosts() {
             totalCost += cellValue
         }
     })
-    $(".cost-total").html("Total Cost: $" + totalCost.toFixed(2));
+    $(".cost-total").html("$ " + totalCost.toFixed(2));
 }
 
 function generateURL() {
@@ -73,7 +73,7 @@ function initializeAutocompleteTextbox(costData) {
 
 function activateDeleteButtons(costData){
     $(".delete-btn").click(function () {
-        $(this).parent().remove()
+        $(this).parents("tr").remove()
         sumCosts()
         generateURL()
         if ($(".cost-value").length < 1) {

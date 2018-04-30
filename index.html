@@ -15,38 +15,49 @@
 <body>
     <div id="content">
         <center>
-                <h1>EconoDoc</h1>
+            <h1>EconoDoc</h1>
         </center>
         <div id="care-list-container">
             <div id="care-list">
-                <div id="cost-list">
-                    <template id="cost-input-template">
-                        <div class="cost-input">
-                            <div class="cost-input-box">
-                                <input class="dropdown-input" />
-                                <button class="dropdown-btn" type="button">
-                                    <i class="fas fa-caret-down"></i>
-                                </button>
-                            </div>
-                            <div class="cost-input-box cost-value">
-                                $
-                                <span class="cost-number">--.--</span>
-                            </div>
-                            <button class="delete-btn" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </template>
-                </div>
-                <br>
-                <div class="cost-input">
-                    <div class="cost-input-box">
-                        <button id="add-cost" type="button">Add Cost Entry</button>
-                    </div>
-                    <div class="cost-input-box cost-total">
-                        Total Cost: $0.00
-                    </div>
-                </div>
+                <table id="cost-list">
+                    <tr>
+                        <th>Medical Intervention</th>
+                        <th>Cost</th>
+                        <th></th>
+                    </tr>
+                    <tbody>
+                        <template id="cost-input-template">
+                            <tr class="cost-input">
+                                <td class="cost-input-box">
+                                    <input class="dropdown-input" />
+                                    <button class="dropdown-btn" type="button">
+                                        <i class="fas fa-caret-down"></i>
+                                    </button>
+                                </td>
+                                <td class="cost-input-box cost-value">
+                                    $
+                                    <span class="cost-number">--.--</span>
+                                </td>
+                                <td>
+                                    <button class="delete-btn" type="button">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                    <tfoot>
+                        <tr class="cost-input">
+                            <td class="cost-input-box">
+                                <button id="add-cost" type="button">Add Intervention</button>
+                            </td>
+                            <td class="cost-input-box cost-total">
+                                $0.00
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>

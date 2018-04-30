@@ -9,7 +9,14 @@ body {
     padding: 30px 10px;
     border-radius: 15px;
 }
-
+table{
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+    border-radius: 13px;
+    padding: 5px;
+}
 #care-list-container{
     display: flex;
 }
@@ -19,15 +26,16 @@ body {
 }
 
 .cost-input {
-    display: flex;
+    text-align: center;
 }
 
 .cost-input-box {
-    display: inline-block;
     padding: 15px;
-    border: 1px solid black;
 }
 ul[role='listbox']{
     max-height: 400px;
     overflow-y: scroll;
+}
+.delete-btn:parent{
+display: flex;
 }
