@@ -31,12 +31,12 @@ function loadURLConfig(costData) {
         $(urlString.split(",")).each(function (_, entry) {
             if (Object.keys(costData).includes(entry)) {
                 if (!first) {
-                    $("#cost-list").append($("#cost-input-template").html())
+                    $("#care-list").append($("#cost-input-template").html())
                 } else {
                     first = 0
                 }
-                $("#cost-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
-                $("#cost-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(costData[entry].cost)
+                $("#care-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
+                $("#care-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(costData[entry].cost)
             }
         })
         sumCosts()
@@ -44,7 +44,7 @@ function loadURLConfig(costData) {
 }
 
 function initializeAutocompleteTextbox(costData) {
-    $(".dropdown-input").each(function (_, entry) {
+    $(".cost-input-box > .dropdown-input").each(function (_, entry) {
         var btn = $(entry).siblings("button").first();
         var comboplete = new Awesomplete(entry, {
             minChars: 0,
@@ -82,14 +82,14 @@ function activateDeleteButtons(costData){
     })
 }
 function addCostEntry(costData) {
-    $("#cost-list").append($("#cost-input-template").html())
+    $("#care-list").append($("#cost-input-template").html())
     initializeAutocompleteTextbox(costData)
     activateDeleteButtons(costData)
 }
 
 $(function () {
     var costData;
-    $("#cost-list").append($("#cost-input-template").html())
+    $("#care-list").append($("#cost-input-template").html())
     $.getJSON("labs.json", function (data) {
         costData = data;
         loadURLConfig(costData)

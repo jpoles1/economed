@@ -3,27 +3,26 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin: 0px;
 }
 
 #content {
-    margin-top: 50px;
     background-color: #ddd;
     padding: 40px 50px;
-    border-radius: 15px;
-    align-self: baseline;
-    max-width: 90%
+    min-height: 100%;
+    display: block;
+    max-width:45%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     body {
-        margin: 0px;
         background-color: #ddd;
         width: 100%;
     }
     #content {
         max-width: 100%;
         padding: 0px;
-        margin: 20px;
+        margin: 20px 5px;
     }
     table tr td:first-child,
     table tr th:first-child {
@@ -33,6 +32,9 @@ body {
     table tr th:last-child {
         border-right: 0;
     }
+    #care-list {
+        width: 100% !important;
+    }
 }
 
 h1 {
@@ -41,7 +43,7 @@ h1 {
 
 .blurb {
     width: 90%;
-    max-width: 400px;
+    min-width: 300px;
     margin: 15px 0px;
 }
 
@@ -57,15 +59,11 @@ table th {
 }
 
 #care-list-container {
-    display: flex;
-}
-
-#care-list {
     margin: auto;
 }
 
-#cost-list {
-    width: 400px;
+#care-list {
+    width: 96%;
 }
 
 .cost-input {
@@ -80,7 +78,12 @@ table th {
     padding: 15px;
     white-space: nowrap;
 }
-
+.cost-input-box .awesomplete{
+    width: 86%;
+}
+.awesomplete input{
+    width: 100%;
+}
 ul[role='listbox'] {
     max-height: 400px;
     overflow-y: scroll;
