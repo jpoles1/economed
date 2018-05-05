@@ -1,5 +1,7 @@
 # EconoMed
 EconoMed is a tool used to help US healthcare providers to understand the cost of the care they deliver using cost data from Medicare.
+The tool was developed by by the NYU School of Medicine DCIM group.
+
 
 ## Rationale
 When healthcare providers are caring for a patient, the costs of labs, procedures, and medications can add up. Get an idea for how much your care plan will cost to Medicare with the EconoMed tool.
