@@ -23,7 +23,15 @@ body {
     #content {
         max-width: 100%;
         padding: 0px;
-        margin: 50px;
+        margin: 20px;
+    }
+    table tr td:first-child,
+    table tr th:first-child {
+        border-left: 0;
+    }
+    table tr td:last-child,
+    table tr th:last-child {
+        border-right: 0;
     }
 }
 
@@ -41,9 +49,8 @@ table {
     border-collapse: collapse;
 }
 
-table,
-th,
-td {
+table td,
+table th {
     border: 1px solid black;
     border-radius: 13px;
     padding: 5px;
@@ -56,7 +63,8 @@ td {
 #care-list {
     margin: auto;
 }
-#cost-list{
+
+#cost-list {
     width: 400px;
 }
 
