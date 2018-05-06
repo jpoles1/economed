@@ -64,7 +64,7 @@ break{
 .blurb {
     width: 90%;
     min-width: 300px;
-    margin: 15px 0px;
+    margin: 15px auto;
 }
 
 table {
@@ -84,6 +84,7 @@ table th {
 
 #care-list {
     width: 96%;
+    margin: auto;
     margin-top: 20px;
 }
 
