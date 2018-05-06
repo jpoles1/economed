@@ -113,4 +113,9 @@ $(function () {
         addtohome.show(true)
         return false;
     })
+    $("#lit-link").click(function(e){
+        $("#literature-review").slideToggle()
+        e.preventDefault()
+        return false;
+    })
 })
