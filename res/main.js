@@ -100,4 +100,17 @@ $(function () {
         addCostEntry(costData)
         return false
     })
+    var addtohome = addToHomescreen({
+        autostart: false,
+        modal: true,
+        skipFirstVisit: true,
+        maxDisplayCount: 2,
+        startDelay: 0,
+        debug: true
+    });
+    $("#add-to-homescreen-link").click(function(e){
+        e.preventDefault()
+        addtohome.show(true)
+        return false;
+    })
 })
