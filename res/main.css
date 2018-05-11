@@ -122,3 +122,7 @@ ul[role='listbox'] {
 #add-cost {
     font-size: 14px;
 }
+#url-box{
+    width: 70%; 
+    text-align: center;
+}

@@ -21,6 +21,10 @@ function generateURL() {
     console.log(urlArray, urlString)
     console.log(encodeURI(urlString))
     window.location.hash = encodeURI(urlString)
+    updateURLBox()
+}
+function updateURLBox(){
+    $("#url-box").val(window.location)
 }
 
 function loadURLConfig(costData) {
@@ -89,6 +93,13 @@ function addCostEntry(costData) {
 
 $(function () {
     var costData;
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        $("#url-box").parent().show()
+    }
+    updateURLBox()
+    $("#url-box").focus(function(){ 
+        $(this).select(); 
+    });
     $("#care-list").append($("#cost-input-template").html())
     $.getJSON("labs.json", function (data) {
         costData = data;
