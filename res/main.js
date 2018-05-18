@@ -40,7 +40,7 @@ function loadURLConfig(costData) {
                     first = 0
                 }
                 $("#care-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
-                $("#care-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(costData[entry].cost)
+                $("#care-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(costData[entry].cost.toFixed(2))
             }
         })
         sumCosts()
@@ -67,7 +67,7 @@ function initializeAutocompleteTextbox(costData) {
         });
         Awesomplete.$(entry).addEventListener("awesomplete-selectcomplete", function () {
             inputValue = $(this).val()
-            $(this).parents(".cost-input").children(".cost-value").children(".cost-number").html(costData[inputValue].cost)
+            $(this).parents(".cost-input").children(".cost-value").children(".cost-number").html(costData[inputValue].cost.toFixed(2))
             sumCosts()
             generateURL()
         })
@@ -101,11 +101,13 @@ $(function () {
         $(this).select(); 
     });
     $("#care-list").append($("#cost-input-template").html())
-    $.getJSON("labs.json", function (data) {
-        costData = data;
-        loadURLConfig(costData)
-        initializeAutocompleteTextbox(costData)
-        activateDeleteButtons(costData)
+    $.getJSON("labs.json", function (labs_costs) {
+        $.getJSON("manhattan_costs.json", function (rvu_costs) {
+            costData = Object.assign({}, labs_costs, rvu_costs);
+            loadURLConfig(costData)
+            initializeAutocompleteTextbox(costData)
+            activateDeleteButtons(costData)    
+        })
     })
     $("#add-cost").click(function () {
         addCostEntry(costData)
