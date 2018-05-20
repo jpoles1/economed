@@ -11,7 +11,7 @@ function sumCosts() {
 
 function generateURL() {
     urlArray = []
-    $(".dropdown-input").each(function (_) {
+    $(".cost-input-box > .dropdown-input").each(function (_) {
         costName = $(this).val();
         if(costName.length > 0){
             urlArray.push(costName)
