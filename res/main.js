@@ -51,9 +51,9 @@ function initializeAutocompleteTextbox(costData) {
     $(".cost-input-box > .dropdown-input").each(function (_, entry) {
         var btn = $(entry).siblings("button").first();
         var comboplete = new Awesomplete(entry, {
-            minChars: 0,
+            minChars: 2,
             list: Object.keys(costData),
-            maxItems: 10000
+            maxItems: 500
         });
         $(btn).click(function () {
             if (comboplete.ul.childNodes.length === 0) {
