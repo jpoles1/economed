@@ -1,4 +1,4 @@
-# Endocrine Case 1:
+# Endocrine Case 1: Changing Face
 
 ### See the costs to Medicare [here](https://jpoles1.github.io/economed/#Office/outpatient%20visit%20est%20-%2099211,X-ray%20exam%20chest%202%20views%20-%2071046,Electrocardiogram%20complete%20-%2093000,Complete%20cbc%20automated%20-%2085027,Comprehen%20metabolic%20panel%20-%2080053,Assay%20of%20thyroid%20(t3%20or%20t4)%20-%2084479,Assay%20thyroid%20stim%20hormone%20-%2084443,Assay%20of%20somatomedin%20-%2084305,Assay%20of%20prolactin%20-%2084146,Assay%20growth%20hormone%20(hgh)%20-%2083003,Assay%20growth%20hormone%20(hgh)%20-%2083003,Mri%20brain%20w/o%20dye%20-%2070557,Removal%20of%20pituitary%20gland%20-%2061548)!
 
