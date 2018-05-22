@@ -1,0 +1,137 @@
+<html>
+
+<head>
+    <title>EconoMed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="120x120" href="res/apple-icon-120x120.png">
+    <link rel="icon" sizes="192x192" href="res/android-icon-192x192.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+        crossorigin="anonymous">
+    <link href="res/awesomplete.css" rel="stylesheet">
+    <link href="res/press.min.css" rel="stylesheet">
+    <link href="res/main.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="res/addtohomescreen.css">
+
+    <script type="text/javascript" src="res/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="res/awesomplete.min.js"></script>
+    <script type="text/javascript" src="res/addtohomescreen.js"></script>
+    <script type="text/javascript" src="res/gpci.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <div style="text-align: center;">
+            <h1>EconoMed: Medicare Cost Calculator</h1>
+            <h4>Value-based care by the numbers.</h4>
+            <hr>
+            <div class="blurb" style="text-align: justify; text-align-last: center;">
+                When healthcare providers are caring for a patient, the costs of labs, procedures, and medications can add up. 
+                Get an idea for how much your care plan will cost to Medicare with the EconoMed tool:
+            </div>
+            <hr>
+            <h4>Select your locale:</h4>
+            <input class="dropdown-input" id="locale-selector" value="MANHATTAN, NY"/>
+            <button class="dropdown-btn" type="button">
+                <i class="fas fa-caret-down"></i>
+            </button>
+            <div style="height: 10px;"></div>
+            <hr>
+            <div id="care-list-container">
+                <table id="care-list">
+                    <thead>
+                        <tr>
+                            <th>Intervention - <a style="color: black; text-decoration: none;" href="https://en.wikipedia.org/wiki/Healthcare_Common_Procedure_Coding_System" target="_blank">HCPCS</a></th>
+                            <th>Cost</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template id="cost-input-template">
+                            <tr class="cost-input">
+                                <td class="cost-input-box">
+                                    <input class="dropdown-input" />
+                                    <button class="dropdown-btn" type="button">
+                                        <i class="fas fa-caret-down"></i>
+                                    </button>
+                                </td>
+                                <td class="cost-input-box cost-value">
+                                    $
+                                    <span class="cost-number">--.--</span>
+                                </td>
+                                <td>
+                                    <button class="delete-btn press press-red press-round press-ghost" type="button">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                    <tfoot>
+                        <tr class="cost-input">
+                            <td class="cost-input-box">
+                                <button id="add-cost" type="button" class="press press-deeppurple press-round" style="background-color: #57069cb3">
+                                    Add Intervention
+                                </button>
+                            </td>
+                            <td class="cost-input-box cost-total">
+                                $0.00
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <br>
+                <hr>
+                <div style="display: none">
+                    <sub>Shareable URL:</sub>
+                    <br>
+                    <input id="url-box" type="text"></input>
+                    <br><br>
+                    <hr>
+                </div>
+                <br>
+                <div class="blurb" style="font-size: 10pt; text-align: justify; text-align-last: center;">
+                        1) Input your management plan into the tool, and it will fetch the cost of the care from medicare fee schedule data.
+                        <break></break>
+                        2) Think! How do you perceive the balance between the quality of care and its cost? Consider if any of the testing is unecessary or ineffectual.
+                        <break></break>
+                        3) Copy your url and share it with others to show them your list of costs.
+                        <break></break>
+                        4) <a id="add-to-homescreen-link" href="#">Add</a> to your smartphone homescreen for quick access!
+                        <div style="height: 20px;"></div>
+                        <i>Familiarize yourself with some <a href="#literature-review" id="lit-link">literature regarding value based care</a>.</i>
+                        <br><br>
+                        <div id="literature-review" style="display: none">
+                            <hr>
+                            <div style="height: 10px;"></div>
+                            <h4>Review of Literature</h4>
+                            <!--<hr style="width: 200px;">-->
+                            <break></break>
+                            <a target="_blank" href="https://www.managedcaremag.com/archives/2015/8/value-quality-outcomes-cost">
+                                Value = (Quality + Outcomes) / Cost
+                            </a>
+                            <break></break>
+                            <a target="_blank" href="https://www.healthaffairs.org/doi/pdf/10.1377/hlthaff.27.3.759">
+                                The Triple Aim: Care, Health, And Cost
+                            </a>
+                            <break></break>
+                            <a target="_blank" href="https://catalyst.nejm.org/why-value-in-health-care-is-the-target/">
+                                Why Value in Health Care Is the Target
+                            </a>
+                            <div style="height: 15px;"></div>
+                        </div>
+                        <hr>
+                        <br><br>
+                        A project from the <a href="https://github.com/NYUSOM-DCIM" target="_blank">NYU School of Medicine DCIM</a> group.
+                        <div style="height: 5px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
