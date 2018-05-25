@@ -88,7 +88,7 @@ function initializeLocaleInput(gpci_data, costData) {
         }
     });
     Awesomplete.$(localeInput[0]).addEventListener("awesomplete-selectcomplete", function () {
-        gpciSetting = gpci_data[inputValue = $(this).val()]
+        gpciSetting = gpci_data[$(this).val()]
         updateCosts(costData)
     })
 }
@@ -155,7 +155,10 @@ $(function () {
                 loadURLConfig(costData)
                 initializeLocaleInput(gpci_data, costData)
                 initializeCostInput(costData)
-                activateDeleteButtons(costData)    
+                activateDeleteButtons(costData)
+                //Set initial location
+                gpciSetting = gpci_data[$("#locale-selector").val()]
+                updateCosts(costData)        
             })
         })
     })
