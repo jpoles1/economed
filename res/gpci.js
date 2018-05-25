@@ -1,4 +1,15 @@
 var gpciSetting;
+
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return decodeURI(results[1]) || 0;
+    }
+}
+
 function calcCost(costEntry, gpciEntry){
     if(costEntry.cost){
         return costEntry.cost.toFixed(2)
@@ -22,29 +33,44 @@ function sumCosts() {
 }
 
 function generateURL() {
-    urlArray = []
+    interventionArray = []
     $(".cost-input-box > .awesomplete > .dropdown-input").each(function (_) {
         costName = $(this).val();
         if(costName.length > 0){
-            urlArray.push(costName)
+            interventionArray.push(costName)
         }
     })
-    urlString = urlArray.join(",")
-    console.log(urlArray, urlString)
-    console.log(encodeURI(urlString))
-    window.location.hash = encodeURI(urlString)
+    interventionString = encodeURIComponent(interventionArray.join(","))
+    localeString = encodeURIComponent($("#locale-selector").val())
     baseURL = window.location.href.split('?')[0];
-    //history.pushState(null, null, baseURL + "?interventions="+encodeURIComponent(urlString));
+    //Can switch to using history.pushState 
+    //though this may cause some issues w/ forward + back navigation and updating of data 
+    history.replaceState(null, null, baseURL + "?locale=" + localeString + "&interventions="+interventionString);
     updateURLBox()
 }
 function updateURLBox(){
     $("#url-box").val(window.location)
 }
 
-function loadURLConfig(costData) {
-    urlString = decodeURI(window.location.hash)
+function urlLocale(gpci_data) {
+    urlString = $.urlParam("locale")    
+    if(urlString){
+        urlString = decodeURIComponent(urlString)
+        if(Object.keys(gpci_data).includes(urlString)){
+            $("#locale-selector").val(urlString)
+            gpciSetting = gpci_data[urlString]        
+        }
+    }
+    gpciSetting = gpci_data[$("#locale-selector").val()]
+}
+
+function urlInterventions(costData) {
+    //Load in interventions
+    urlString = $.urlParam("interventions")
+    if(!urlString) return
+    urlString = decodeURIComponent(urlString)
     if (urlString.length > 0) {
-        urlString = urlString.split('#')[1]
+        console.log(urlString)
         first = 1;
         $(urlString.split(",")).each(function (_, entry) {
             if (Object.keys(costData).includes(entry)) {
@@ -63,7 +89,9 @@ function loadURLConfig(costData) {
 function updateCosts(costData){
     $(".cost-input-box > .awesomplete > .dropdown-input").each(function (_) {
         costName = $(this).val();
-        $(this).parent().parent().parent().children(".cost-value").children(".cost-number").html(calcCost(costData[costName], gpciSetting))
+        if (Object.keys(costData).includes(costName)) {
+            $(this).parent().parent().parent().children(".cost-value").children(".cost-number").html(calcCost(costData[costName], gpciSetting))
+        }
     })
     sumCosts()
 }
@@ -90,6 +118,7 @@ function initializeLocaleInput(gpci_data, costData) {
     Awesomplete.$(localeInput[0]).addEventListener("awesomplete-selectcomplete", function () {
         gpciSetting = gpci_data[$(this).val()]
         updateCosts(costData)
+        generateURL()
     })
 }
 function initializeCostInput(costData) {
@@ -152,13 +181,11 @@ $(function () {
             $.getJSON("rvu_costs.json", function (rvu_costs) {
                 gpciSetting = gpci_data[Object.keys(gpci_data)[0]]
                 costData = Object.assign({}, labs_costs, rvu_costs);
-                loadURLConfig(costData)
+                urlLocale(gpci_data)
+                urlInterventions(costData)
                 initializeLocaleInput(gpci_data, costData)
                 initializeCostInput(costData)
                 activateDeleteButtons(costData)
-                //Set initial location
-                gpciSetting = gpci_data[$("#locale-selector").val()]
-                updateCosts(costData)        
             })
         })
     })
