@@ -29,7 +29,13 @@ function sumCosts() {
             totalCost += cellValue
         }
     })
-    $(".cost-total").html("$ " + totalCost.toFixed(2));
+    totalCost = totalCost.toFixed(2)
+    $(".cost-total").html("$ " + totalCost);
+    const medicareDeductible = 183
+    var deductibleCost = Math.min(totalCost, medicareDeductible);
+    var copay = totalCost >  medicareDeductible ? (totalCost - 183) * .2 : 0
+    var copay = copay.toFixed(2)
+    $("#patient-costs").html("$" + deductibleCost + " deductible + $" + copay + " copay")
 }
 
 function generateURL() {
