@@ -36,7 +36,7 @@ function sumCosts() {
     deductibleCost = deductibleCost.toFixed(2)
     var copay = totalCost >  medicareDeductible ? (totalCost - 183) * .2 : 0
     copay = copay.toFixed(2)
-    $("#patient-costs").html("$" + deductibleCost + " deductible + $" + copay + " copay")
+    $("#patient-costs").html("$" + deductibleCost + " annual deductible<br>+<br>$" + copay + " copay")
 }
 
 function generateURL() {
