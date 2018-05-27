@@ -33,8 +33,9 @@ function sumCosts() {
     $(".cost-total").html("$ " + totalCost);
     const medicareDeductible = 183
     var deductibleCost = Math.min(totalCost, medicareDeductible);
+    deductibleCost = deductibleCost.toFixed(2)
     var copay = totalCost >  medicareDeductible ? (totalCost - 183) * .2 : 0
-    var copay = copay.toFixed(2)
+    copay = copay.toFixed(2)
     $("#patient-costs").html("$" + deductibleCost + " deductible + $" + copay + " copay")
 }
 
@@ -73,7 +74,10 @@ function urlLocale(gpci_data) {
 function urlInterventions(costData) {
     //Load in interventions
     urlString = $.urlParam("interventions")
-    if(!urlString) return
+    if(!urlString){
+        sumCosts()
+        return
+    }
     urlString = decodeURIComponent(urlString)
     if (urlString.length > 0) {
         console.log(urlString)
@@ -89,8 +93,8 @@ function urlInterventions(costData) {
                 $("#care-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(calcCost(costData[entry], gpciSetting))
             }
         })
-        sumCosts()
     }
+    sumCosts()
 }
 function updateCosts(costData){
     $(".cost-input-box > .awesomplete > .dropdown-input").each(function (_) {
