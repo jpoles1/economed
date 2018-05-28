@@ -60,6 +60,9 @@ break{
     height: 8px;
     display: block;
 }
+#literature-review break{
+    height: 13px !important;
+}
 
 .blurb {
     width: 90%;
