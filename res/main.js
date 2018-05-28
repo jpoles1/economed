@@ -56,7 +56,7 @@ function generateURL() {
     updateURLBox()
 }
 function updateURLBox(){
-    $("#url-box").val(window.location)
+    $(".url-box").val(window.location)
 }
 
 function urlLocale(gpci_data) {
@@ -179,10 +179,10 @@ function addCostEntry(costData) {
 $(function () {
     var costData;
     if (window.matchMedia('(display-mode: standalone)').matches) {
-        $("#url-box").parent().show()
+        $(".url-box").parent().show()
     }
     updateURLBox()
-    $("#url-box, #locale-selector").focus(function(){ 
+    $(".url-box, #locale-selector").focus(function(){ 
         $(this).select(); 
     });
     $("#care-list").append($("#cost-input-template").html())

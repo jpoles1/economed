@@ -56,6 +56,9 @@ h4 {
     font-style: italic;
     margin: 5px 0;
 }
+hidden{
+    display: none;
+}
 break{
     height: 8px;
     display: block;
