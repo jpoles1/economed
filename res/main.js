@@ -10,7 +10,10 @@ $.urlParam = function(name){
     }
 }
 
-function calcCost(costEntry, gpciEntry){
+function calcInpatientCost(costEntry){
+    return costEntry["Average Medicare Payments"].toFixed(2)
+}
+function calcOutpatientCost(costEntry, gpciEntry){
     if(costEntry.cost){
         return costEntry.cost.toFixed(2)
     }
@@ -21,42 +24,52 @@ function calcCost(costEntry, gpciEntry){
     console.log("Error calculating cost for:", costEntry)
     return 0
 }
-function sumCosts() {
+
+//Calculate the cost of the care plan for a medicare outpatient
+function outpatientPricetag(element, totalCost) {
+    const medicareDeductible = 183
+    var deductibleCost = Math.min(totalCost, medicareDeductible);
+    deductibleCost = deductibleCost.toFixed(2)
+    var copay = totalCost >  medicareDeductible ? (totalCost - 183) * .2 : 0
+    copay = copay.toFixed(2)
+    $(element).find(".patient-costs").html("$" + deductibleCost + " annual deductible<br>+<br>$" + copay + " copay")
+}
+function sumCosts(element) {
     var totalCost = 0.0
-    $(".cost-value > .cost-number").each(function (_, entry) {
+    $(element).find(".cost-value > .cost-number").each(function (_, entry) {
         cellValue = parseFloat($(entry).html())
         if (!isNaN(cellValue)) {
             totalCost += cellValue
         }
     })
     totalCost = totalCost.toFixed(2)
-    $(".cost-total").html("$ " + totalCost);
-    const medicareDeductible = 183
-    var deductibleCost = Math.min(totalCost, medicareDeductible);
-    deductibleCost = deductibleCost.toFixed(2)
-    var copay = totalCost >  medicareDeductible ? (totalCost - 183) * .2 : 0
-    copay = copay.toFixed(2)
-    $("#patient-costs").html("$" + deductibleCost + " annual deductible<br>+<br>$" + copay + " copay")
+    $(element).find(".cost-total").html("$ " + totalCost);
+    outpatientPricetag(element, totalCost)
+    return totalCost
 }
 
 function generateURL() {
-    interventionArray = []
-    $(".cost-input-box > .awesomplete > .dropdown-input").each(function (_) {
-        costName = $(this).val();
-        if(costName.length > 0){
-            interventionArray.push(costName)
-        }
-    })
-    interventionString = encodeURIComponent(interventionArray.join(","))
+    generateInterventionArray = function(element){
+        interventionArray = []
+        $(element).find(".cost-input-box > .awesomplete > .dropdown-input").each(function (_) {
+            costName = $(this).val();
+            if(costName.length > 0){
+                interventionArray.push(costName)
+            }
+        })
+        return interventionArray   
+    }
+    outpatientString = encodeURIComponent(generateInterventionArray("#outpatient-panel").join(","))
+    inpatientString = encodeURIComponent(generateInterventionArray("#inpatient-panel").join(","))
     localeString = encodeURIComponent($("#locale-selector").val())
     baseURL = window.location.href.split('?')[0];
     //Can switch to using history.pushState 
     //though this may cause some issues w/ forward + back navigation and updating of data 
-    history.replaceState(null, null, baseURL + "?locale=" + localeString + "&interventions="+interventionString);
+    history.replaceState(null, null, baseURL + "?locale=" + localeString + "&outpatient=" + outpatientString + "&inpatient=" + inpatientString);
     updateURLBox()
 }
 function updateURLBox(){
-    $("#url-box").val(window.location)
+    $(".url-box").val(window.location)
 }
 
 function urlLocale(gpci_data) {
@@ -71,42 +84,42 @@ function urlLocale(gpci_data) {
     gpciSetting = gpci_data[$("#locale-selector").val()]
 }
 
-function urlInterventions(costData) {
+function urlInterventions(urlParam, element, costFunction, costData) {
     //Load in interventions
-    urlString = $.urlParam("interventions")
+    urlString = $.urlParam(urlParam)
     if(!urlString){
-        sumCosts()
+        updateCosts(element, costFunction, costData)
+        outpatientPricetag(element, sumCosts(element))
         return
     }
     urlString = decodeURIComponent(urlString)
     if (urlString.length > 0) {
-        console.log(urlString)
         first = 1;
         $(urlString.split(",")).each(function (_, entry) {
             if (Object.keys(costData).includes(entry)) {
                 if (!first) {
-                    $("#care-list").append($("#cost-input-template").html())
+                    $(element).find(".care-list").append($(element).find(".cost-input-template").html())
                 } else {
                     first = 0
                 }
-                $("#care-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
-                $("#care-list").children(".cost-input").last().children(".cost-value").children(".cost-number").html(calcCost(costData[entry], gpciSetting))
+                $(element).find(".care-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
             }
         })
     }
-    sumCosts()
+    updateCosts(element, costFunction, costData)
+    outpatientPricetag(element, sumCosts(element))
+    $(element).slideDown()
 }
-function updateCosts(costData){
-    $(".cost-input-box > .awesomplete > .dropdown-input").each(function (_) {
+function updateCosts(element, costFunction, costData){
+    $(element).find(".cost-input-box").find(".dropdown-input").each(function (_) {
         costName = $(this).val();
         if (Object.keys(costData).includes(costName)) {
-            $(this).parent().parent().parent().children(".cost-value").children(".cost-number").html(calcCost(costData[costName], gpciSetting))
+            $(this).parents(".cost-input").find(".cost-number").html(costFunction(costData[costName]))
         }
     })
-    sumCosts()
+    sumCosts(element)
 }
-function initializeLocaleInput(gpci_data, costData) {
-    console.log(gpci_data)
+function initializeLocaleInput(element, costFunction, gpci_data, costData) {
     var localeInput = $("#locale-selector")
     var btn = localeInput.siblings("button").first();
     var comboplete = new Awesomplete(localeInput[0], {
@@ -127,12 +140,12 @@ function initializeLocaleInput(gpci_data, costData) {
     });
     Awesomplete.$(localeInput[0]).addEventListener("awesomplete-selectcomplete", function () {
         gpciSetting = gpci_data[$(this).val()]
-        updateCosts(costData)
+        updateCosts(element, costFunction, costData)
         generateURL()
     })
 }
-function initializeCostInput(costData) {
-    $(".cost-input-box > .dropdown-input").each(function (_, entry) {
+function initializeCostInput(element, costFunction, costData) {
+    $(element).find(".cost-input-box > .dropdown-input").each(function (_, entry) {
         var btn = $(entry).siblings("button").first();
         var comboplete = new Awesomplete(entry, {
             minChars: 2,
@@ -152,56 +165,69 @@ function initializeCostInput(costData) {
         });
         Awesomplete.$(entry).addEventListener("awesomplete-selectcomplete", function () {
             inputValue = $(this).val()
-            $(this).parents(".cost-input").children(".cost-value").children(".cost-number").html(calcCost(costData[inputValue], gpciSetting))
-            sumCosts()
+            updateCosts(element, costFunction, costData)
+            sumCosts(element)
             generateURL()
         })
 
     })
 }
 
-function activateDeleteButtons(costData){
+function activateDeleteButtons(element, costFunction, costData){
     $(".delete-btn").click(function () {
         $(this).parents("tr").remove()
-        sumCosts()
+        sumCosts(element)
         generateURL()
-        if ($(".cost-value").length < 1) {
-            addCostEntry(costData)
+        if ($(element).find(".cost-value").length < 1) {
+            addCostEntry(element, costFunction, costData)
         }
     })
 }
-function addCostEntry(costData) {
-    $("#care-list").append($("#cost-input-template").html())
-    initializeCostInput(costData)
-    activateDeleteButtons(costData)
+function addCostEntry(element, costFunction, costData) {
+    $(element).find(".care-list").append($(element).find(".cost-input-template").html())
+    initializeCostInput(element, costFunction, costData)
+    activateDeleteButtons(element, costFunction, costData)
 }
 
 $(function () {
-    var costData;
+    $(".panel").hide()
     if (window.matchMedia('(display-mode: standalone)').matches) {
-        $("#url-box").parent().show()
+        $(".url-box").parent().show()
     }
     updateURLBox()
-    $("#url-box, #locale-selector").focus(function(){ 
+    $(".url-box, #locale-selector").focus(function(){ 
         $(this).select(); 
     });
-    $("#care-list").append($("#cost-input-template").html())
+    $("#inpatient-panel").find(".care-list").append($("#inpatient-panel").find(".cost-input-template").html())
+    $("#outpatient-panel").find(".care-list").append($("#outpatient-panel").find(".cost-input-template").html())
     $.getJSON("labs.json", function (labs_costs) {
         $.getJSON("gpci.json", function (gpci_data) {
             $.getJSON("rvu_costs.json", function (rvu_costs) {
-                gpciSetting = gpci_data[Object.keys(gpci_data)[0]]
-                costData = Object.assign({}, labs_costs, rvu_costs);
-                urlLocale(gpci_data)
-                urlInterventions(costData)
-                initializeLocaleInput(gpci_data, costData)
-                initializeCostInput(costData)
-                activateDeleteButtons(costData)
+                $.getJSON("drg_avg_costs.json", function (drg_avg_costs) {
+                    gpciSetting = gpci_data[Object.keys(gpci_data)[0]]
+                    outpatient_costs = Object.assign({}, labs_costs, rvu_costs);
+                    urlLocale(gpci_data)
+                    _calcOutpatientCost = function(costEntry){
+                        return calcOutpatientCost(costEntry, gpciSetting)
+                    }
+                    urlInterventions("outpatient", "#outpatient-panel", _calcOutpatientCost, outpatient_costs)
+                    urlInterventions("inpatient", "#inpatient-panel", calcInpatientCost, drg_avg_costs)
+                    initializeLocaleInput("#outpatient-panel", _calcOutpatientCost, gpci_data, outpatient_costs)
+                    initializeCostInput("#outpatient-panel", _calcOutpatientCost, outpatient_costs)
+                    initializeCostInput("#inpatient-panel", calcInpatientCost, drg_avg_costs)
+                    activateDeleteButtons("#outpatient-panel", _calcOutpatientCost, outpatient_costs)
+                    activateDeleteButtons("#inpatient-panel", calcInpatientCost, drg_avg_costs)
+                    $("#outpatient-panel").find(".add-cost").click(function () {
+                        addCostEntry($(this).parents(".panel"), _calcOutpatientCost, outpatient_costs)
+                        return false
+                    })
+                    $("#inpatient-panel").find(".add-cost").click(function () {
+                        addCostEntry($(this).parents(".panel"), calcInpatientCost, drg_avg_costs)
+                        return false
+                    })
+                })
             })
         })
-    })
-    $("#add-cost").click(function () {
-        addCostEntry(costData)
-        return false
     })
     var addtohome = addToHomescreen({
         autostart: false,
