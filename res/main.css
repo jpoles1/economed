@@ -38,7 +38,7 @@ body {
     table tr th:last-child {
         border-right: 0;
     }
-    #care-list {
+    .care-list {
         width: 100% !important;
     }
 }
@@ -83,11 +83,11 @@ table th {
     padding: 5px;
 }
 
-#care-list-container {
+.care-list-container {
     margin: auto;
 }
 
-#care-list {
+.care-list {
     width: 96%;
     margin: auto;
     margin-top: 20px;
@@ -125,7 +125,7 @@ ul[role='listbox'] {
     margin: 0 5px;
 }
 
-#add-cost {
+.add-cost {
     font-size: 14px;
 }
 #url-box{
