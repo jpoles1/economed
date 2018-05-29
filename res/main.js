@@ -145,7 +145,7 @@ function initializeLocaleInput(element, costFunction, gpci_data, costData) {
     })
 }
 function initializeCostInput(element, costFunction, costData) {
-    $(element).find(".cost-input-box > .dropdown-input").each(function (_, entry) {
+    $(element).find(".cost-input-box").find(".dropdown-input").each(function (_, entry) {
         var btn = $(entry).siblings("button").first();
         var comboplete = new Awesomplete(entry, {
             minChars: 2,

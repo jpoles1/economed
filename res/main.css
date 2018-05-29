@@ -100,7 +100,9 @@ table th {
 .dropdown-input {
     text-align: center;
 }
-
+.awesomplete ul{
+    white-space: normal;
+}
 .cost-input-box {
     padding: 15px;
     white-space: nowrap;
