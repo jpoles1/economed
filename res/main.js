@@ -108,6 +108,7 @@ function urlInterventions(urlParam, element, costFunction, costData) {
     }
     updateCosts(element, costFunction, costData)
     outpatientPricetag(element, sumCosts(element))
+    $(element).slideDown()
 }
 function updateCosts(element, costFunction, costData){
     $(element).find(".cost-input-box").find(".dropdown-input").each(function (_) {
@@ -189,7 +190,7 @@ function addCostEntry(element, costFunction, costData) {
 }
 
 $(function () {
-    var costData;
+    $(".panel").hide()
     if (window.matchMedia('(display-mode: standalone)').matches) {
         $(".url-box").parent().show()
     }
