@@ -65,8 +65,11 @@ function generateURL() {
     localeString = encodeURIComponent($("#locale-selector").val())
     baseURL = window.location.href.split('?')[0];
     //Can switch to using history.pushState 
-    //though this may cause some issues w/ forward + back navigation and updating of data 
-    history.pushState(null, null, baseURL + "?locale=" + localeString + "&outpatient=" + outpatientString + "&inpatient=" + inpatientString + "&pharma=" + pharmaString);
+    //though this may cause some issues w/ forward + back navigation and updating of data
+    newURL = baseURL + "?locale=" + localeString + "&outpatient=" + outpatientString + "&inpatient=" + inpatientString + "&pharma=" + pharmaString;
+    if(newURL != window.location){
+        history.pushState(null, null, newURL);
+    }
     updateURLBox()
 }
 function updateURLBox(){
