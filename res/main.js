@@ -192,6 +192,10 @@ function addCostEntry(element, costFunction, costData) {
 }
 
 $(function () {
+    //Watch for changes to page forward/back and refresh
+    $(window).on('popstate', function() {
+        location.reload(true);
+    });
     $(".panel").hide()
     if (window.matchMedia('(display-mode: standalone)').matches) {
         $(".url-box").parent().show()
