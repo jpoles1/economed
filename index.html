@@ -171,6 +171,68 @@
                     </div>
                 </div>
             </div>
+            <button class="accordion">
+                <h2>Pharmaceutical Costs</h2>
+                <h4 style="font-size: 18px;">Medicare Part D</h4>    
+            </button>
+            <hr>
+            <div class="panel" id="pharma-panel">
+                <div style="height: 5px;"></div>
+                <div class="care-list-container">
+                    <table class="care-list">
+                        <thead>
+                            <tr>
+                                <th>Brand Name - <a style="color: black; text-decoration: none;" href="https://en.wikipedia.org/wiki/Diagnosis-related_group" target="_blank">Generic</a></th>
+                                <th>Cost/Unit</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template class="cost-input-template">
+                                <tr class="cost-input">
+                                    <td class="cost-input-box">
+                                        <input class="dropdown-input" />
+                                        <button class="dropdown-btn" type="button">
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </td>
+                                    <td class="cost-input-box cost-value">
+                                        $
+                                        <span class="cost-number">--.--</span>
+                                    </td>
+                                    <td>
+                                        <button class="delete-btn press press-red press-round press-ghost" type="button">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                        <tfoot>
+                            <tr class="cost-input">
+                                <td class="cost-input-box">
+                                    <button type="button" class="add-cost press press-deeppurple press-round" style="background-color: #57069cb3">
+                                        Add Intervention
+                                    </button>
+                                </td>
+                                <td class="cost-input-box cost-total">
+                                    $0.00
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <br>
+                    <hr>
+                    <div style="display: none">
+                        <sub>Shareable URL:</sub>
+                        <br>
+                        <input class="url-box" type="text"></input>
+                        <br><br>
+                        <hr>
+                    </div>
+                </div>
+            </div>
             <div style="height: 5px;"></div>
             <div class="blurb" style="font-size: 10pt; text-align: justify; text-align-last: center;">
                 1) Input your management plan into the tool, and it will fetch the cost of the care from medicare fee schedule data.
