@@ -6,7 +6,6 @@ $(function(){
         this.classList.toggle("active");
         var panel = $(this).nextAll(".panel").eq(0);
         $(panel).slideToggle()
-        console.log(panel)
       });
     }
 })
