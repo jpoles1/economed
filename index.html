@@ -32,19 +32,23 @@
             <h1>EconoMed: Medicare Cost Calculator</h1>
             <h4>Value-based care by the numbers.</h4>
             <hr>
-            <div class="blurb" style="text-align: justify; text-align-last: center;">
+            <div class="blurb" style="text-align: justify;">
                 When healthcare providers are caring for a patient, the costs of labs, procedures, and medications can add up. 
                 Get an idea for how much your care plan will cost to Medicare with the EconoMed tool.
+                Tap a cost type below to get started.
             </div>
             <hr>
             <button class="accordion">
                 <h2>Outpatient Costs</h2>
                 <h4 style="font-size: 18px;">Medicare Part B</h4>    
             </button>
-            <hr>
             <div class="panel" id="outpatient-panel">
-                <div style="height: 5px;"></div>
-                
+                <hr>
+                <div class="blurb" style="text-align: justify;">
+                Medicare Part B covers the cost to patients receiving emergency department services, observation services, outpatient surgery, lab tests, or X-rays, as long as they have not been admitted to the hospital as an inpatient.
+				Literature has demonstrated that some of these interventions are of low value (=quality/cost) and these will be highlighted (tap/hover for more info).
+                </div>
+                <hr>
                 <div style="height: 5px;"></div>
                 <h4>Select your locale:</h4>
                 <input class="dropdown-input" id="locale-selector" value="MANHATTAN, NY"/>
@@ -100,10 +104,10 @@
                         </tfoot>
                     </table>
                     <br>
-                    <div>
+                    <hr>
+                    <div class="blurb">
                         <h4>Maximum cost to the patient is:</h4>
                         <div class="patient-costs"></div>
-                        <div style="height: 10px;"></div>
                     </div>
                     <hr>
                     <div style="display: none">
@@ -119,9 +123,8 @@
                 <h2>Inpatient Costs</h2>
                 <h4 style="font-size: 18px;">Medicare Part A</h4>    
             </button>
-            <hr>
             <div class="panel" id="inpatient-panel">
-                <div style="height: 5px;"></div>
+                <hr>
                 <div class="care-list-container">
                     <table class="care-list">
                         <thead>
@@ -181,7 +184,6 @@
                 <h2>Pharmaceutical Costs</h2>
                 <h4 style="font-size: 18px;">Medicare Part D</h4>    
             </button>
-            <hr>
             <div class="panel" id="pharma-panel">
                 <div style="height: 5px;"></div>
                 <div class="care-list-container">
@@ -233,7 +235,6 @@
                         </tfoot>
                     </table>
                     <br>
-                    <hr>
                     <div style="display: none">
                         <sub>Shareable URL:</sub>
                         <br>
@@ -243,6 +244,8 @@
                     </div>
                 </div>
             </div>
+            <div style="height: 15px;"></div>
+            <hr>
             <div style="height: 5px;"></div>
             <div class="blurb" style="font-size: 10pt; text-align: justify; text-align-last: center;">
                 1) Input your management plan into the tool, and it will fetch the cost of the care from medicare fee schedule data.
