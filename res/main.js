@@ -106,15 +106,10 @@ function urlInterventions(urlParam, element, costFunction, costData) {
     }
     urlString = decodeURIComponent(urlString)
     if (urlString.length > 0) {
-        first = 1;
         $(urlString.split(",")).each(function (_, entry) {
             console.log(entry)
             if (Object.keys(costData).includes(entry)) {
-                if (!first) {
-                    $(element).find(".care-list").append($(element).find(".cost-input-template").html())
-                } else {
-                    first = 0
-                }
+                $(element).find(".care-list").append($(element).find(".cost-input-template").html())
                 $(element).find(".care-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
             }
         })
@@ -238,9 +233,6 @@ $(function () {
     $(".url-box, #locale-selector").focus(function(){ 
         $(this).select(); 
     });
-    $("#inpatient-panel").find(".care-list").append($("#inpatient-panel").find(".cost-input-template").html())
-    $("#outpatient-panel").find(".care-list").append($("#outpatient-panel").find(".cost-input-template").html())
-    $("#pharma-panel").find(".care-list").append($("#pharma-panel").find(".cost-input-template").html())
     var labs_costs, gpci_data, rvu_costs, drg_avg_costs, pharma_costs
     $.when(
         $.getJSON("labs.json", function(data) {
@@ -268,16 +260,25 @@ $(function () {
         _calcOutpatientCost = function(costEntry){
             return calcOutpatientCost(costEntry, gpciSetting)
         }
+
         urlInterventions("outpatient", "#outpatient-panel", _calcOutpatientCost, outpatient_costs)
         urlInterventions("inpatient", "#inpatient-panel", calcInpatientCost, drg_avg_costs)
         urlInterventions("pharma", "#pharma-panel", _calcOutpatientCost, pharma_costs)
+
+        addCostEntry("#outpatient-panel", _calcOutpatientCost, outpatient_costs)
+        addCostEntry("#inpatient-panel", calcInpatientCost, drg_avg_costs)
+        addCostEntry("#pharma-panel", _calcOutpatientCost, pharma_costs)
+
         initializeLocaleInput("#outpatient-panel", _calcOutpatientCost, gpci_data, outpatient_costs)
+       
         initializeCostInput("#outpatient-panel", _calcOutpatientCost, outpatient_costs)
         initializeCostInput("#inpatient-panel", calcInpatientCost, drg_avg_costs)
         initializeCostInput("#pharma-panel", _calcOutpatientCost, pharma_costs)
+       
         activateDeleteButtons("#outpatient-panel", _calcOutpatientCost, outpatient_costs)
         activateDeleteButtons("#inpatient-panel", calcInpatientCost, drg_avg_costs)
         activateDeleteButtons("#pharma-panel", _calcOutpatientCost, pharma_costs)
+
         $("#outpatient-panel").find(".add-cost").click(function () {
             addCostEntry($(this).parents(".panel"), _calcOutpatientCost, outpatient_costs)
             return false
