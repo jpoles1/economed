@@ -13,7 +13,8 @@ body {
     padding: 40px 50px 0px 50px;
     min-height: 100%;
     display: block;
-    max-width: 50%;
+    width: 80%;
+    max-width: 650px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -23,6 +24,7 @@ body {
     }
     #content {
         box-shadow: 0px 0px 2px #0000007a;
+        width: 100%;
         max-width: 100%;
         padding: 0px;
         margin: 0px 4px;
