@@ -100,6 +100,7 @@ function urlInterventions(urlParam, element, costFunction, costData) {
     //Load in interventions
     urlString = $.urlParam(urlParam)
     if(!urlString){
+        addCostEntry(element, costFunction, costData)
         updateCosts(element, costFunction, costData)
         outpatientPricetag(element, sumCosts(element))
         return
@@ -257,6 +258,7 @@ $(function () {
         gpciSetting = gpci_data[Object.keys(gpci_data)[0]]
         outpatient_costs = Object.assign({}, labs_costs, rvu_costs);
         urlLocale(gpci_data)
+        
         _calcOutpatientCost = function(costEntry){
             return calcOutpatientCost(costEntry, gpciSetting)
         }
@@ -264,10 +266,6 @@ $(function () {
         urlInterventions("outpatient", "#outpatient-panel", _calcOutpatientCost, outpatient_costs)
         urlInterventions("inpatient", "#inpatient-panel", calcInpatientCost, drg_avg_costs)
         urlInterventions("pharma", "#pharma-panel", _calcOutpatientCost, pharma_costs)
-
-        addCostEntry("#outpatient-panel", _calcOutpatientCost, outpatient_costs)
-        addCostEntry("#inpatient-panel", calcInpatientCost, drg_avg_costs)
-        addCostEntry("#pharma-panel", _calcOutpatientCost, pharma_costs)
 
         initializeLocaleInput("#outpatient-panel", _calcOutpatientCost, gpci_data, outpatient_costs)
        
