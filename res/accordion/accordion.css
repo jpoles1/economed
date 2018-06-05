@@ -11,7 +11,7 @@
     outline: none;
     transition: 0.4s;
     box-shadow: inset 0 0 3px #555;
-    background-color: #ddd;
+    background-color: #f0f0f0;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
