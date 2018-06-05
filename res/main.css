@@ -154,3 +154,10 @@ ul[role='listbox'] {
     color: white;
     font-weight: normal;
 }
+.data-source, .data-source a{
+    margin-top: 10px;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: normal;
+    color: black;
+}
