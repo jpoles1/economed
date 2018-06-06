@@ -88,7 +88,7 @@ function urlLocale(gpci_data) {
     urlString = $.urlParam("locale")    
     if(urlString){
         urlString = decodeURIComponent(urlString)
-        if(Object.keys(gpci_data).includes(urlString)){
+        if(urlString in Object.keys(gpci_data)){
             $("#locale-selector").val(urlString)
             gpciSetting = gpci_data[urlString]        
         }
@@ -109,7 +109,7 @@ function urlInterventions(urlParam, element, costFunction, costData) {
     if (urlString.length > 0) {
         $(urlString.split(",")).each(function (_, entry) {
             console.log(entry)
-            if (Object.keys(costData).includes(entry)) {
+            if (entry in Object.keys(costData)) {
                 $(element).find(".care-list").append($(element).find(".cost-input-template").html())
                 $(element).find(".care-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
             }
@@ -127,11 +127,11 @@ function updateCosts(element, costFunction, costData){
         costName = $(this).val();
         low_value_indicator = $(this).parents(".cost-input").find(".low-value-warning")
         low_value_tooltip = $(this).parents(".cost-input").find(".low-value-tooltip")
-        if (Object.keys(costData).includes(costName)) {
+        if (costName in Object.keys(costData)) {
             $(this).parents(".cost-input").find(".cost-number").html(costFunction(costData[costName]))
             if(costData[costName]["HCPCS"]){
                 var hcpcs_code = costData[costName]["HCPCS"]
-                if(Object.keys(low_value_cpt).includes(hcpcs_code)){
+                if(hcpcs_code in Object.keys(low_value_cpt)){
                     var qual_string = low_value_cpt[hcpcs_code]["Qualifications"].replace(";", "<hr>")
                     var reference_url = "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2442504"
                     var tooltip_string = "<a target='_blank' href="+reference_url+">Literature suggests that this might be a low value code if used for:</a><hr>" + qual_string + "<hr>"
@@ -256,7 +256,7 @@ $(function () {
         })
     ).then(function() {
         gpciSetting = gpci_data[Object.keys(gpci_data)[0]]
-        outpatient_costs = Object.assign({}, labs_costs, rvu_costs);
+        outpatient_costs = $.extend({}, labs_costs, rvu_costs);
         urlLocale(gpci_data)
         
         _calcOutpatientCost = function(costEntry){
