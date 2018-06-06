@@ -15,8 +15,24 @@
     <link href="res/press.min.css" rel="stylesheet">
     <link href="res/accordion/accordion.css" rel="stylesheet">
     <link href="res/main.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="res/addtohomescreen.css">
-
+	<link rel="stylesheet" type="text/css" href="res/addtohomescreen.css">
+	<link rel="stylesheet" type="text/css" href="res/outdated-browser/outdated.css">
+	<script src="res/outdated-browser/outdated-browser-rework.min.js"></script>
+	<script>
+		outdatedBrowserRework({
+			browserSupport: {
+				'Chrome': 57, // Includes Chrome for mobile devices
+				'Edge': 39,
+				'Safari': 10,
+				'Mobile Safari': 10,
+				'Firefox': 50,
+				'Opera': 50,
+				// You could specify a version here if you still support IE in 2017.
+				// You could also instead seriously consider what you're doing with your time and budget
+				'IE': false
+			}
+		})
+	</script>
     <script type="text/javascript" src="res/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="res/awesomplete.min.js"></script>
     <script type="text/javascript" src="res/addtohomescreen.js"></script>
@@ -316,10 +332,11 @@
             </div>
             <div style="height: 30px;"></div>
         </div>
-    </div>
+	</div>
+	<div id="outdated"></div>
     <script>
         tippy('tooltip')
-    </script>
+	</script>
 </body>
 
 </html>
