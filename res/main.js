@@ -217,6 +217,7 @@ function addCostEntry(element, costFunction, costData) {
     initializeCostInput(element, costFunction, costData)
     activateDeleteButtons(element, costFunction, costData)
     initValueTooltip($(new_entry).children(".cost-input").last().find(".low-value-tooltip")[0])
+    $(new_entry).find(".dropdown-input").focus()
 }
 
 $(function () {
