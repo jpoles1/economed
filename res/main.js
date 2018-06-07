@@ -88,7 +88,7 @@ function urlLocale(gpci_data) {
     urlString = $.urlParam("locale")    
     if(urlString){
         urlString = decodeURIComponent(urlString)
-        if(urlString in Object.keys(gpci_data)){
+        if(Object.keys(gpci_data).indexOf(urlString) > -1){
             $("#locale-selector").val(urlString)
             gpciSetting = gpci_data[urlString]        
         }
@@ -108,8 +108,7 @@ function urlInterventions(urlParam, element, costFunction, costData) {
     urlString = decodeURIComponent(urlString)
     if (urlString.length > 0) {
         $(urlString.split(",")).each(function (_, entry) {
-            console.log(entry)
-            if (entry in Object.keys(costData)) {
+            if (Object.keys(costData).indexOf(entry) > -1) {
                 $(element).find(".care-list").append($(element).find(".cost-input-template").html())
                 $(element).find(".care-list").children(".cost-input").last().children(".cost-input-box").children("input").val(entry)
             }
@@ -127,11 +126,11 @@ function updateCosts(element, costFunction, costData){
         costName = $(this).val();
         low_value_indicator = $(this).parents(".cost-input").find(".low-value-warning")
         low_value_tooltip = $(this).parents(".cost-input").find(".low-value-tooltip")
-        if (costName in Object.keys(costData)) {
+        if (Object.keys(costData).indexOf(costName) > -1) {
             $(this).parents(".cost-input").find(".cost-number").html(costFunction(costData[costName]))
             if(costData[costName]["HCPCS"]){
                 var hcpcs_code = costData[costName]["HCPCS"]
-                if(hcpcs_code in Object.keys(low_value_cpt)){
+                if(Object.keys(low_value_cpt).indexOf(hcpcs_code) > -1){
                     var qual_string = low_value_cpt[hcpcs_code]["Qualifications"].replace(";", "<hr>")
                     var reference_url = "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2442504"
                     var tooltip_string = "<a target='_blank' href="+reference_url+">Literature suggests that this might be a low value code if used for:</a><hr>" + qual_string + "<hr>"
@@ -217,7 +216,6 @@ function addCostEntry(element, costFunction, costData) {
     var new_entry = $(element).find(".care-list").append($(element).find(".cost-input-template").html())
     initializeCostInput(element, costFunction, costData)
     activateDeleteButtons(element, costFunction, costData)
-    console.log($(new_entry).children(".cost-input").last().find(".low-value-tooltip")[0])
     initValueTooltip($(new_entry).children(".cost-input").last().find(".low-value-tooltip")[0])
 }
 
