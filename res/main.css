@@ -79,9 +79,21 @@ table {
     border-collapse: collapse;
 }
 
+@-moz-document url-prefix() { 
+    table {
+        border-collapse: inherit;
+        border-spacing: 0;
+    }
+    table td,
+    table th {
+        border: 1px solid #666;
+    }
+}
+  
+
 table td,
 table th {
-    border: 1px solid #666;
+    border: 1.5px solid #666;
     padding: 5px;
 }
 
