@@ -1,6 +1,6 @@
 # Case 2: Rising Costs in the ER
 
-### See the costs to medicare [here](https://jpoles1.github.io/economed/?locale=HOUSTON%2C%20TX&outpatient=Emergency%20dept%20visit%20-%2099281%2CEmergency%20dept%20visit%20-%2099282%2CEmergency%20dept%20visit%20-%2099283%2CEmergency%20dept%20visit%20-%2099284%2CEmergency%20dept%20visit%20-%2099285&inpatient=&pharma=)!
+### See the costs to medicare <a href="https://jpoles1.github.io/economed/?locale=HOUSTON%2C%20TX&outpatient=Emergency%20dept%20visit%20-%2099281%2CEmergency%20dept%20visit%20-%2099282%2CEmergency%20dept%20visit%20-%2099283%2CEmergency%20dept%20visit%20-%2099284%2CEmergency%20dept%20visit%20-%2099285&inpatient=&pharma" target="_blank">here</a>!
 
 In June 2018, the [Houston Chronicle reported](https://www.houstonchronicle.com/news/houston-texas/houston/article/Cost-of-ER-visits-nearly-doubled-as-fees-are-12970203.php) that the cost of paying for the average individual's Emergency Room (ER) visits had nearly doubled from 2009 to 2016. For a large system like Medicare, tasked with insuring 56.8 million Americans in 2016 (according to the [NCPSSM](http://www.ncpssm.org/our-issues/medicare/medicare-fast-facts/)), this can place a trememndous cost-burden on the system. 
 
