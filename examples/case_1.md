@@ -1,4 +1,4 @@
-# Endocrine Case 1: Changing Face
+# Case 1: Changing Face
 
 ### See the costs to Medicare <a href="https://jpoles1.github.io/economed/?locale=MANHATTAN%2C%20NY&outpatient=Office%2Foutpatient%20visit%20est%20-%2099211%2CX-ray%20exam%20chest%202%20views%20-%2071046%2CElectrocardiogram%20complete%20-%2093000%2CComplete%20cbc%20automated%20-%2085027%2CComprehen%20metabolic%20panel%20-%2080053%2CAssay%20of%20thyroid%20(t3%20or%20t4)%20-%2084479%2CAssay%20thyroid%20stim%20hormone%20-%2084443%2CAssay%20of%20somatomedin%20-%2084305%2CAssay%20of%20prolactin%20-%2084146%2CAssay%20growth%20hormone%20(hgh)%20-%2083003%2CAssay%20growth%20hormone%20(hgh)%20-%2083003%2CMri%20brain%20w%2Fo%20dye%20-%2070557%2CRemoval%20of%20pituitary%20gland%20-%2061548" target="_blank">here</a>!
 
